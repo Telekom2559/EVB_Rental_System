@@ -749,6 +749,9 @@ void callback(char* topic, byte* message, unsigned int length) // callback(char*
 void mqttReconnect() 
 {
   SerialMon.print(F("Attempting MQTT connection... \r\n"));
+  mqtt.setServer(MQTT_SVR, MQTT_PRT);
+  mqtt.setCallback(callback);
+  mqtt.setBufferSize(900);
   if (mqtt.connect(MQTT_NAME, MQTT_USERNAME, MQTT_PASS)) 
   {
     Serial.println("MQTT_CMD_TOPIC is "+String(MQTT_CMD_TOPIC));
